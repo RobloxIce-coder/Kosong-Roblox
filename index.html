@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Contoh api Javascript</title>
+  <style>
+    #kontainer-kode {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%;
+      height: 35px;
+      border: 3px solid black;
+      background-color: rgba(0,0,0,0.1);
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+    }
+    #kode {
+      font-weight: bolder;
+    }
+    .copy-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      width: 200px;
+    }
+    .copy-container button {
+      width: 30%;
+      height: 30px;
+      margin: 0 3px;
+    }
+    #copy:hover {
+      background-color: #31DECF;
+    }
+    #requests:hover {
+      background-color: #31DECF;
+    }
+    #delete:hover {
+      background-color: #31DECF;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">             
+</head>
+<body>
+  <center><h2>Api Javascript (fetch)</h2></center>
+  <div id="kontainer-kode">
+    <div id="kode">
+    </div>
+  </div>
+  <div class="copy-container">
+    <button id="copy"><i data-lucide="copy"></i></button>
+    <button id="requests"><i data-lucide="send"></i></button>
+    <button id="delete"><i data-lucide="trash"></i></button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.js"></script>
+  <script>feather.replace();</script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script>
+    let code = document.getElementById("kode");
+    let copy = document.getElementById("copy");
+    let send = document.getElementById("requests");
+    let del = document.getElementById("delete");
+    
+     send.addEventListener("click", () => {
+  fetch("https://isnahamzah.com")              
+    .then(response => response.text())
+    .then(teks => {
+      code.textContent = teks;
+    })
+    .catch(err => {
+      fetch("https://example.com")
+    .then(response => response.text())
+    .then(teks => {
+      code.textContent = teks;
+    })
+    .catch(err => {
+      fetch("temp.html")
+        .then(response => response.text())
+        .then(teks => {
+          code.textContent = teks;
+        })
+        .catch(err => {
+          alert("Gagal request api!");
+        })
+    })
+})
+});
+    copy.addEventListener("click", () => {
+      window.navigator.clipboard.writeText(code.textContent)
+      .then(alert("Kode berhasil di salin!"))
+      .catch(err => alert(`Tidak dapat menyalin teks: ${err}`));
+     }
+    )
+    del.addEventListener("click", () => {
+      code.textContent = "";
+      }
+    )
+  </script>
+</body>
+</html>
